@@ -82,6 +82,6 @@
         <spring-boot.version>3.0.0</spring-boot.version>
         <log4j2.version>2.15.0</log4j2.version>
         <spring-boot-mail.version>2.7.0</spring-boot-mail.version>
-        <org.mapstruct.version>1.5.1.Final</org.mapstruct.version>
+        <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
     </properties>
 </project>
