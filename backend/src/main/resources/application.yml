@@ -1,3 +1,8 @@
+server:
+  servlet:
+    contextPath: /api/v1
+  port: 8991
+
 db:
   name: test
   uri: mongodb://localhost:27017
