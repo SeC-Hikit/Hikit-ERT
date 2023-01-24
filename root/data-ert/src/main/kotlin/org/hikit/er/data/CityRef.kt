@@ -1,3 +1,5 @@
+package org.hikit.er.data
+
 data class CityRef(
     var istat : String,
     var city: String,

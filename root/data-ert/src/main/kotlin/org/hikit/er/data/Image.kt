@@ -1,3 +1,5 @@
+package org.hikit.er.data
+
 data class Image(
     val url: String,
     val thumb: String,

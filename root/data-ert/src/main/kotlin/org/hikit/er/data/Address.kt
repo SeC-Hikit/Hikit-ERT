@@ -1,3 +1,5 @@
+package org.hikit.er.data
+
 data class Address(
     val name: String,
     val address: String,

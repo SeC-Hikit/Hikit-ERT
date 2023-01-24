@@ -4,7 +4,7 @@ That will serve to integrate ERT data with Hikit service.
 
 ## Build
 ### Prerequisites
-- JDK 17
+- JDK 11
 - Maven 3
 
 ### Development build

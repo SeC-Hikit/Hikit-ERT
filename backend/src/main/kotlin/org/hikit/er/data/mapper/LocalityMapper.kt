@@ -1,6 +1,6 @@
 package org.hikit.er.data.mapper
 
-import Locality
+import org.hikit.er.data.Locality
 import org.hikit.er.rest.LocalityDto
 import org.mapstruct.Mapper
 import org.mapstruct.ReportingPolicy

@@ -1,3 +1,5 @@
+package org.hikit.er.data
+
 import java.util.*
 
 data class Locality(

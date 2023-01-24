@@ -1,3 +1,6 @@
 db:
   name: test
   uri: mongodb://localhost:27017
+
+endpoint:
+  locality: https://emiliaromagnaturismo.it/opendata/v1/localities

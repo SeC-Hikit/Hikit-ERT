@@ -41,6 +41,11 @@
             <version>${kotlin.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.hikit</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -66,7 +71,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <jvmTarget>17</jvmTarget>
+                    <jvmTarget>11</jvmTarget>
                 </configuration>
             </plugin>
         </plugins>
@@ -75,11 +80,11 @@
     <properties>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <kotlin.version>1.6.0</kotlin.version>
+        <kotlin.version>1.7.0</kotlin.version>
         <jpx.version>2.3.0</jpx.version>
         <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
         <junit.version>4.13.1</junit.version>
-        <spring-boot.version>3.0.0</spring-boot.version>
+        <spring-boot.version>2.6.0</spring-boot.version>
         <log4j2.version>2.15.0</log4j2.version>
         <spring-boot-mail.version>2.7.0</spring-boot-mail.version>
         <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
