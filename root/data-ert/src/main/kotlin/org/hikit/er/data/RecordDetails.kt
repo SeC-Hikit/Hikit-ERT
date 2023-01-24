@@ -1,8 +1,9 @@
 package org.hikit.er.data
 
+import java.time.LocalDateTime
 import java.util.*
 
 data class RecordDetails (
-    val createAt: Date,
-    val updatedAt: Date,
+    val createdAt: LocalDateTime,
+    val updatedAt: LocalDateTime,
 )

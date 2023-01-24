@@ -5,5 +5,5 @@ data class CityRef(
     var city: String,
     var province: String,
     var province_short: String,
-    var iat: Address
+    var iat: List<Iat>
 )

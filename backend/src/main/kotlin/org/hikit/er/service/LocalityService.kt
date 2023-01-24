@@ -11,6 +11,7 @@ class LocalityService @Autowired constructor(
 ) {
 
     fun get(page: Int, skip: Int, coordinates: Coordinates, distance: Double) {
+
         localityClient.localitiesGet("it", "40036", "BO", 10, page, "", "");
         throw NotImplementedError()
     }

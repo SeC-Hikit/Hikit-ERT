@@ -25,7 +25,7 @@ class LocalityController @Autowired constructor(private val localityService: Loc
         @RequestParam(required = false, defaultValue = MAX_DOCS_ON_READ) limit: Int,
         @RequestParam(required = false, defaultValue = NO_FILTERING_TOKEN) query: String
     ): LocalityResponse? {
-        localityService.get(0, 0, Coordinates(0.0, 0.0, 0.0), 0.0)
+        localityService.get(0, 0, Coordinates(0.0, 0.0), 0.0)
         return null
     }
 

@@ -1,10 +1,9 @@
 package org.hikit.er.data
 
-data class Address(
+data class Iat(
     val name: String,
     val address: String,
     val number: String,
     val coordinates: Coordinates,
-    val telephone: List<Contact>,
-    val email: List<Contact>
+    val contacts: List<Contact>
 )
