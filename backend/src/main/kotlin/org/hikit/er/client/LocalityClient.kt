@@ -1,7 +1,6 @@
 package org.hikit.er.client
 
 import org.ert.api.LocalitiesApi
-import org.openapitools.model.LocalityResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.web.client.RestTemplateBuilder
@@ -22,8 +21,8 @@ class LocalityClient @Autowired constructor(
         page: Int?,
         updated: String?,
         query: String?
-    ): ResponseEntity<LocalityResponse> {
+    ): ResponseEntity<org.openapitools.model.LocalityResponse> {
         return restTemplateBuilder.build()
-            .getForEntity(endpointUrl, LocalityResponse::class.java)
+            .getForEntity(endpointUrl, org.openapitools.model.LocalityResponse::class.java)
     }
 }
