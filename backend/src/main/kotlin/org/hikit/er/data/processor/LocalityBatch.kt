@@ -5,5 +5,5 @@ import org.hikit.er.data.Locality
 data class LocalityBatch(
     val page: Int,
     val of: Int,
-    val data: Set<Locality>
+    val data: List<Locality>
 )

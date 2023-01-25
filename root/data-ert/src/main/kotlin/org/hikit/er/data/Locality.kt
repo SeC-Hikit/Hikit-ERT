@@ -12,4 +12,8 @@ data class Locality(
     var relatingCity: CityRef,
     var recordDetails: RecordDetails,
     var importedOn: Date
-)
+) {
+    companion object {
+        val COLLECTION_NAME: String  = "ert.Locality"
+    }
+}
