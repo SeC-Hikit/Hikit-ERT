@@ -6,4 +6,12 @@ data class CityRef(
     var province: String,
     var province_short: String,
     var iat: List<Iat>
-)
+) {
+    companion object {
+        val ISTAT = "istat"
+        val CITY = "city"
+        val PROVINCE = "province"
+        val PROVINCE_SHORT = "provinceShort"
+        val IAT = "iat"
+    }
+}

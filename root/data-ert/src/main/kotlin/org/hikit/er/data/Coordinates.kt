@@ -1,6 +1,7 @@
 package org.hikit.er.data
 
 data class Coordinates(
-    var latitude : Double,
-    var longitude : Double,
+    var latitude: Double,
+    var longitude: Double,
+
 )

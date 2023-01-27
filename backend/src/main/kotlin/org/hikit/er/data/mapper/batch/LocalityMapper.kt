@@ -52,7 +52,7 @@ class LocalityMapper {
                     width = att.width,
                     height = att.height,
                     license = att.license,
-                    license_url = att.licenseUrl
+                    licenseUrl = att.licenseUrl
                 )
             },
             recordDetails = RecordDetails(
