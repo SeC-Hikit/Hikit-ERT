@@ -13,7 +13,7 @@ constructor(
     private val localityDao: LocalityDao,
 ) {
     fun upsertOnRemoteId(localities: List<Locality>): List<Locality> {
-
-        return localityDao.upsertOnRemoteId(localities);
+        localityDao.upsertOnRemoteId(localities);
+        return emptyList()
     }
 }

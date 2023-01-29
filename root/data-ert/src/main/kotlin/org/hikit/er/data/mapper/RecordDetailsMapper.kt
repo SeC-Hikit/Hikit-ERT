@@ -8,13 +8,16 @@ import org.hikit.er.data.RecordDetails
 import org.springframework.stereotype.Component
 
 @Component
-class RecordDetailsMapper constructor(): EntityMapper<RecordDetails> {
-    override fun mapToObject(p0: Document): RecordDetails {
-        TODO("Not yet implemented")
-    }
+class RecordDetailsMapper constructor(private val dateTimeMapper: DateTimeMapper) : EntityMapper<RecordDetails> {
+    override fun mapToObject(document: Document): RecordDetails =
+        RecordDetails(
+            dateTimeMapper.map(document.getString(RecordDetails.CREATED_AT)),
+            dateTimeMapper.map(document.getString(RecordDetails.UPDATED_AT))
+        )
 
-    override fun mapToDocument(p0: RecordDetails): Document {
-        TODO("Not yet implemented")
-    }
+    override fun mapToDocument(entity: RecordDetails): Document =
+        Document(RecordDetails.CREATED_AT, entity.createdAt.toString())
+            .append(RecordDetails.UPDATED_AT, entity.updatedAt.toString())
+
 
 }

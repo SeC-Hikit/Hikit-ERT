@@ -1,15 +1,16 @@
 package org.hikit.er.data.mapper.batch
 
 import org.hikit.er.data.*
+import org.hikit.er.data.mapper.DateTimeMapper
 import org.openapitools.model.LocalityResponseData
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Date
 
 @Component
-class LocalityMapper {
-    private val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd k:m:s")
+class LocalityMapper @Autowired constructor(private val dateTimeMapper: DateTimeMapper){
 
     fun map(lrp: LocalityResponseData): Locality =
         Locality(
@@ -37,12 +38,11 @@ class LocalityMapper {
                     )
                 }
             ),
-            coordinates = listOf(
+            coordinates =
                 Coordinates(
                     latitude = lrp.location.lat.toDouble(),
                     longitude = lrp.location.lng.toDouble()
-                )
-            ),
+                ),
             images = lrp.attachments.map { att ->
                 Image(
                     url = att.url,
@@ -56,9 +56,8 @@ class LocalityMapper {
                 )
             },
             recordDetails = RecordDetails(
-                createdAt = LocalDateTime.parse(lrp.createdAt, dateTimeFormatter),
-                updatedAt = LocalDateTime.parse(lrp.updatedAt, dateTimeFormatter)
-
+                createdAt = dateTimeMapper.map(lrp.createdAt),
+                updatedAt = dateTimeMapper.map(lrp.updatedAt)
             ),
             importedOn = Date()
         )

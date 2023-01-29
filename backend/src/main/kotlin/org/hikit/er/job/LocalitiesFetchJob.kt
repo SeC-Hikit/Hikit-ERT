@@ -13,19 +13,18 @@ import java.util.concurrent.TimeUnit
 @Component
 class LocalitiesFetchJob @Autowired constructor(
     private val localityProcessor: LocalityProcessor,
-    private val localityEntityMapper : LocalityEntityMapper,
     private val localityManager: LocalityManager
 ) {
     private val logger = LogManager.getLogger(LocalitiesFetchJob::class.java)
 
     //    @Scheduled(fixedRateString = "PT12H", initialDelay = 1000)
-    @Scheduled(fixedRate = 10000, timeUnit = TimeUnit.MILLISECONDS)
+    @Scheduled(initialDelay = 3000, fixedRate = 600000, timeUnit = TimeUnit.MILLISECONDS)
     fun fetch() {
         logger.info("Going to fetch LOCALITY data from ERT API")
         var pageToProcess = 0
         do {
             val processBatch = localityProcessor.processBatch(pageToProcess)
-            val savedEntities = localityManager.upsertOnRemoteId(processBatch.data)
+            localityManager.upsertOnRemoteId(processBatch.data)
             val isThereMoreToFetch = processBatch.page < processBatch.of
             pageToProcess += 1;
             Thread.sleep(1000)

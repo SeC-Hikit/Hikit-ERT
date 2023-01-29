@@ -4,7 +4,7 @@ data class Iat(
     val name: String,
     val address: String,
     val number: String,
-    val coordinates: List<Double>,
+    val coordinates: Coordinates,
     val contacts: List<Contact>
 ) {
     companion object {
