@@ -14,17 +14,17 @@ class LocalityEntityMapper @Autowired constructor(
     private val recordDetailsMapper: RecordDetailsMapper
 ) : EntityMapper<Locality> {
     override fun mapToObject(document: Document): Locality {
-        val longLat = document.getList(Locality.COORDINATES, Double::class.java)
+        val longLat = document.get(Locality.COORDINATES, List::class.java)
         return Locality(
-            _id = document.getString(Locality.ID),
+            _id = document.getObjectId(Locality.ID).toHexString(),
             remoteId = document.getString(Locality.REMOTE_ID),
             name = document.getString(Locality.NAME),
             description = document.getString(Locality.DESCRIPTION),
             coordinates = Coordinates(
-                longitude = longLat[0],
-                latitude = longLat[1]
+                longitude = longLat[0] as Double,
+                latitude = longLat[1] as Double
             ),
-            images = document.getList(Locality.COORDINATES, Document::class.java)
+            images = document.getList(Locality.IMAGES, Document::class.java)
                 .map { imageEntityMapper.mapToObject(it) },
             relatingCity = refCityMapper.mapToObject(document.get(Locality.RELATING_CITY, Document::class.java)),
             recordDetails = recordDetailsMapper.mapToObject(
@@ -38,17 +38,15 @@ class LocalityEntityMapper @Autowired constructor(
     }
 
     override fun mapToDocument(entity: Locality): Document =
-        Document(
-            Locality.ID, entity._id
-        )
+        Document()
             .append(Locality.REMOTE_ID, entity.remoteId)
             .append(Locality.NAME, entity.name)
             .append(Locality.DESCRIPTION, entity.description)
             .append(
                 Locality.COORDINATES,
-                arrayOf(
-                    entity.coordinates.longitude,
-                    entity.coordinates.latitude
+                listOf(
+                    entity.coordinates.longitude.toFloat(),
+                    entity.coordinates.latitude.toFloat()
                 )
             )
             .append(Locality.IMAGES, entity.images.map { imageEntityMapper.mapToDocument(it) })

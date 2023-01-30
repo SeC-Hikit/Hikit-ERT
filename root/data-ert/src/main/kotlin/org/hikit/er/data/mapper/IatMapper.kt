@@ -8,14 +8,14 @@ import org.springframework.stereotype.Component
 @Component
 class IatMapper constructor(private val contactMapper: ContactMapper) : EntityMapper<Iat> {
     override fun mapToObject(doc: Document): Iat {
-        val longLat = doc.getList(Iat.COORDINATES, Double::class.java)
+        val longLat = doc.get(Iat.COORDINATES, List::class.java)
         return Iat(
             name = doc.getString(Iat.NAME),
             address = doc.getString(Iat.ADDRESS),
             number = doc.getString(Iat.NUMBER),
             coordinates = Coordinates(
-                longitude = longLat[0],
-                latitude = longLat[1]
+                longitude = longLat[0] as Double,
+                latitude = longLat[1] as Double
             ),
             contacts = doc.getList(Iat.CONTACTS, Document::class.java)
                 .map { contactMapper.mapToObject(it) }
@@ -28,9 +28,9 @@ class IatMapper constructor(private val contactMapper: ContactMapper) : EntityMa
             .append(Iat.NUMBER, entity.address)
             .append(
                 Locality.COORDINATES,
-                arrayOf(
-                    entity.coordinates.longitude,
-                    entity.coordinates.latitude
+                listOf(
+                    entity.coordinates.longitude.toFloat(),
+                    entity.coordinates.latitude.toFloat()
                 )
             )
             .append(Iat.CONTACTS,

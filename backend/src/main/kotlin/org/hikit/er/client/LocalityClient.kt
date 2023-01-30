@@ -27,7 +27,9 @@ class LocalityClient @Autowired constructor(
     ): ResponseEntity<org.openapitools.model.LocalityResponse>? {
         return try {
             restTemplateBuilder.build()
-                .getForEntity(endpointUrl, org.openapitools.model.LocalityResponse::class.java)
+                .getForEntity(
+                    endpointUrl.plus("?prov=${prov}&limit=${limit}&page=${page}"),
+                    org.openapitools.model.LocalityResponse::class.java)
         } catch (restClientException : RestClientException) {
             logger.error("The remote locality API responded with an error", restClientException.cause)
             null

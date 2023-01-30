@@ -15,7 +15,7 @@ class RefCityMapper @Autowired constructor(private val iatMapper: IatMapper) : E
             city = doc.getString(CityRef.CITY),
             province = doc.getString(CityRef.PROVINCE),
             province_short = doc.getString(CityRef.PROVINCE_SHORT),
-            iat = doc.getList(CityRef, Document::class.java).map { iatMapper.mapToObject(it) }
+            iat = doc.getList(CityRef, Document::class.java, emptyList()).map { iatMapper.mapToObject(it) }
         )
 
     override fun mapToDocument(obj: CityRef): Document =

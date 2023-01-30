@@ -10,4 +10,9 @@ class DateTimeMapper {
 
     fun map(date: String): LocalDateTime =
         LocalDateTime.parse(date, dateTimeFormatter)
+
+    fun format(date: LocalDateTime): String  =
+        date.format(dateTimeFormatter)
+
+
 }

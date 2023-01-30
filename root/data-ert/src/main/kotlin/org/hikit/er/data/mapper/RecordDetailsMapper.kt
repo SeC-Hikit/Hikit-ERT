@@ -16,8 +16,8 @@ class RecordDetailsMapper constructor(private val dateTimeMapper: DateTimeMapper
         )
 
     override fun mapToDocument(entity: RecordDetails): Document =
-        Document(RecordDetails.CREATED_AT, entity.createdAt.toString())
-            .append(RecordDetails.UPDATED_AT, entity.updatedAt.toString())
+        Document(RecordDetails.CREATED_AT, dateTimeMapper.format(entity.createdAt))
+            .append(RecordDetails.UPDATED_AT,dateTimeMapper.format(entity.updatedAt))
 
 
 }
