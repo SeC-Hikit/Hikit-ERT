@@ -1,6 +1,7 @@
-package org.hikit.er.data
+package org.hikit.er.rest
 
-data class Coordinates(
+data class CoordinatesDto (
     var latitude: Double,
     var longitude: Double,
 )
+

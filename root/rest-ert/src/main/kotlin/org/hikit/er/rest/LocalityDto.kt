@@ -6,10 +6,10 @@ data class LocalityDto(
     var id: String,
     var name: String,
     var description: String,
-//    var coordinates: List<CoordinatesEntity>,
-//    var image: ImageEntity,
+    var coordinates: List<CoordinatesDto>,
+    var image: ImageDto,
     var license: String,
-//    var relatingCity: CityRefEntity,
-//    var recordDetails: RecordDetailsEntity,
+    var relatingCity: CityRefDto,
+    var recordDetails: RecordDetailsDto,
     var importedOn: Date
 )
