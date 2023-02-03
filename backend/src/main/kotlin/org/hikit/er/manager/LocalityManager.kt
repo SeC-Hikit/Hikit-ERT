@@ -23,8 +23,8 @@ constructor(
     fun upsertOnRemoteId(localities: List<Locality>): List<Locality> =
         localityDao.upsertOnRemoteId(localities);
 
-    fun countByDistance(coordinates: Coordinates, distance: Double): Long {
+    fun countByDistance(coordinates: Coordinates, distance: Double): Long =
         localityDao.count(coordinates.latitude, coordinates.longitude, distance)
-    }
+
 
 }

@@ -5,16 +5,19 @@ import com.mongodb.client.model.FindOneAndReplaceOptions
 import com.mongodb.client.model.ReturnDocument
 import org.bson.Document
 import org.hikit.common.datasource.Datasource
+import org.hikit.common.datasource.DocumentListMapperHelper
+import org.hikit.common.datasource.MongoUtils.getPointNearSearchQuery
 import org.hikit.er.data.Coordinates
 import org.hikit.er.data.Locality
 import org.hikit.er.data.mapper.LocalityEntityMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-import java.util.*
+import sun.security.x509.CRLDistributionPointsExtension.POINTS
 
 @Component
 class LocalityDao @Autowired constructor(
     private val localityEntityMapper: LocalityEntityMapper,
+    private val documentListMapperHelper: DocumentListMapperHelper<Locality>,
     dataSource: Datasource
 ) {
 
@@ -33,25 +36,31 @@ class LocalityDao @Autowired constructor(
         }
 
     fun get(skip: Int, limit: Int, coordinates: Coordinates, distance: Double): List<Locality> {
-        collection.find(
-                Document(
-                    POINTS,
-                    getPointNearSearchQuery(coordinates.longitude,
-                        coordinates.latitude, distance)
-                )
-            )
-            .skip(skip)
-            .limit(limit)
-    }
-
-    fun count(latitude: Double, longitude: Double, distance: Double) {
-        collection.countDocuments(Document(
+        val documents = collection.find(
             Document(
                 POINTS,
                 getPointNearSearchQuery(
-                    longitude,
-                    latitude, distance)
+                    coordinates.longitude,
+                    coordinates.latitude, distance
+                )
             )
-        ))
+        )
+            .skip(skip)
+            .limit(limit)
+        return documentListMapperHelper.toEntries(documents, localityEntityMapper)
     }
+
+
+    fun count(latitude: Double, longitude: Double, distance: Double) =
+        collection.countDocuments(
+            Document(
+                Document(
+                    POINTS,
+                    getPointNearSearchQuery(
+                        longitude,
+                        latitude, distance
+                    )
+                )
+            )
+        )
 }
