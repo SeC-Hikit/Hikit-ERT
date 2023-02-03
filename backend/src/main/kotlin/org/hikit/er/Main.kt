@@ -1,4 +1,4 @@
-package org.hikit
+package org.hikit.er
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -7,7 +7,8 @@ import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
 
-@SpringBootApplication(exclude = [MongoAutoConfiguration::class])
+@SpringBootApplication(exclude = [MongoAutoConfiguration::class],
+    scanBasePackages=["org.hikit.er", "org.hikit.common"])
 open class Main {
 
     companion object{

@@ -15,14 +15,19 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
+        <start-class>org.hikit.er.Main</start-class>
         <jackson-module-kotlin.version>2.11.2</jackson-module-kotlin.version>
-        <mongo-java-driver.version>3.12.8</mongo-java-driver.version>
-        <tika-core.version>1.25</tika-core.version>
-        <springdoc-openapi-ui.version>1.5.2</springdoc-openapi-ui.version>
+        <mongo-java-driver.version>3.12.11</mongo-java-driver.version>
+        <springdoc-openapi-ui.version>1.6.14</springdoc-openapi-ui.version>
         <mockk.version>1.12.3</mockk.version>
-        <itextpdf.version>5.5.12</itextpdf.version>
         <kotlinx-coroutines-core.version>1.6.0</kotlinx-coroutines-core.version>
+        <spring-data-jpa.version>2.4.6</spring-data-jpa.version>
+        <mongodb-driver-sync.version>4.8.2</mongodb-driver-sync.version>
+        <jackson-databind-nullable.version>0.2.1</jackson-databind-nullable.version>
+        <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+        <okhttp.version>4.10.0</okhttp.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.hikit</groupId>
@@ -32,6 +37,11 @@
         <dependency>
             <groupId>org.hikit</groupId>
             <artifactId>data-ert</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hikit</groupId>
+            <artifactId>common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
@@ -46,12 +56,12 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-mail</artifactId>
-            <version>${spring-boot-mail.version}</version>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>${spring-data-jpa.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -85,13 +95,56 @@
             <artifactId>mapstruct</artifactId>
             <version>${org.mapstruct.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>${jackson-databind-nullable.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox-swagger2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>${okhttp.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>5.1.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/resources/client/swagger_3.0.2.yaml</inputSpec>
+                            <generatorName>spring</generatorName>
+                            <configOptions>
+                                <apiPackage>org.ert.api</apiPackage>
+                                <interfaceOnly>true</interfaceOnly>
+                                <generateBuilders>true</generateBuilders>,
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <configuration>
+                    <classifier>spring-boot</classifier>
+                    <mainClass>
+                        org.hikit.er.Main
+                    </mainClass>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
@@ -112,7 +165,7 @@
                         </goals>
                         <configuration>
                             <sourceDirs>
-                                <sourceDir>${project.basedir}/src/test/java</sourceDir>
+                                <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
                             </sourceDirs>
                         </configuration>
                     </execution>
@@ -123,8 +176,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <source>17</source>
-                    <target>17</target>
+                    <source>11</source>
+                    <target>11</target>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.mapstruct</groupId>
@@ -190,6 +243,7 @@
                     <plugin>
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-maven-plugin</artifactId>
+                        <version>${spring-boot.version}</version>
                         <executions>
                             <execution>
                                 <goals>
@@ -198,7 +252,7 @@
                                 <configuration>
                                     <classifier>spring-boot</classifier>
                                     <mainClass>
-                                        org.hikit.Main
+                                        org.hikit.er.Main
                                     </mainClass>
                                 </configuration>
                             </execution>

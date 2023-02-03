@@ -1,0 +1,11 @@
+server:
+  servlet:
+    contextPath: /api/v1
+  port: 8991
+
+db:
+  name: ert
+  uri: mongodb://localhost:27017
+
+endpoint:
+  locality: https://emiliaromagnaturismo.it/opendata/v1/localities
