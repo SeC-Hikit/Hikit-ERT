@@ -12,7 +12,6 @@ import org.hikit.er.data.Locality
 import org.hikit.er.data.mapper.LocalityEntityMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-import sun.security.x509.CRLDistributionPointsExtension.POINTS
 
 @Component
 class LocalityDao @Autowired constructor(
@@ -38,7 +37,7 @@ class LocalityDao @Autowired constructor(
     fun get(skip: Int, limit: Int, coordinates: Coordinates, distance: Double): List<Locality> {
         val documents = collection.find(
             Document(
-                POINTS,
+                Locality.COORDINATES,
                 getPointNearSearchQuery(
                     coordinates.longitude,
                     coordinates.latitude, distance
@@ -55,7 +54,7 @@ class LocalityDao @Autowired constructor(
         collection.countDocuments(
             Document(
                 Document(
-                    POINTS,
+                    Locality.COORDINATES,
                     getPointNearSearchQuery(
                         longitude,
                         latitude, distance

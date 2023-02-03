@@ -9,16 +9,10 @@ import org.springframework.stereotype.Service
 @Service
 class LocalityService @Autowired constructor(private val localityManager: LocalityManager) {
 
-    fun get(skip: Int, limit: Int, coordinates: Coordinates, distance: Double) : LocalityInternalResponse {
+    fun get(skip: Int, limit: Int, coordinates: Coordinates, distance: Double): LocalityInternalResponse =
         LocalityInternalResponse(
             localityManager.get(skip, limit, coordinates, distance),
             localityManager.countByDistance(coordinates, distance)
         )
-    }
-
-    fun getByText(page: Int, skip: Int, coordinates: Coordinates, distance: Double) {
-        throw NotImplementedError()
-    }
-
 
 }
