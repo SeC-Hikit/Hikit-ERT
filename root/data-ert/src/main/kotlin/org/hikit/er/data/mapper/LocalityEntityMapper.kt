@@ -15,14 +15,14 @@ class LocalityEntityMapper @Autowired constructor(
     private val recordDetailsMapper: RecordDetailsMapper
 ) : EntityMapper<Locality> {
     override fun mapToObject(document: Document): Locality {
-        val longLat = document.get(Locality.COORDINATES, List::class.java)
         return Locality(
             _id = document.getObjectId(Locality.ID).toHexString(),
             remoteId = document.getString(Locality.REMOTE_ID),
             name = document.getString(Locality.NAME),
             description = document.getString(Locality.DESCRIPTION),
             coordinates = multiPointCoordsMapper.mapToObject(
-                document.get(Locality.COORDINATES, Document::class.java)),
+                document.get(Locality.COORDINATES, Document::class.java)
+            ),
             images = document.getList(Locality.IMAGES, Document::class.java)
                 .map { imageEntityMapper.mapToObject(it) },
             relatingCity = refCityMapper.mapToObject(document.get(Locality.RELATING_CITY, Document::class.java)),
