@@ -1,5 +1,6 @@
 package org.hikit.er.data.mapper.batch
 
+import org.hikit.common.data.mapper.MultiPointCoords2D
 import org.hikit.er.data.*
 import org.hikit.er.data.mapper.DateTimeMapper
 import org.openapitools.model.LocalityResponseData
@@ -42,9 +43,13 @@ class LocalityMapper @Autowired constructor(private val dateTimeMapper: DateTime
                     }
                 ),
                 coordinates =
-                Coordinates(
-                    latitude = lrp.location.lat.toDouble(),
-                    longitude = lrp.location.lng.toDouble()
+                MultiPointCoords2D(
+                    listOf(
+                        listOf(
+                            lrp.location.lng.toDouble(),
+                            lrp.location.lat.toDouble()
+                        )
+                    )
                 ),
                 images = lrp.attachments.map { att ->
                     Image(

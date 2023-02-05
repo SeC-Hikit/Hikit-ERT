@@ -1,5 +1,6 @@
 package org.hikit.er.data
 
+import org.hikit.common.data.mapper.MultiPointCoords2D
 import java.util.*
 
 data class Locality(
@@ -7,7 +8,7 @@ data class Locality(
     var remoteId: String,
     var name: String,
     var description: String,
-    var coordinates: Coordinates,
+    var coordinates: MultiPointCoords2D,
     var images: List<Image>,
     var relatingCity: CityRef,
     var recordDetails: RecordDetails,

@@ -2,7 +2,7 @@ package org.hikit.er.data.mapper
 
 import org.bson.Document
 import org.hikit.common.data.mapper.EntityMapper
-import org.hikit.er.data.Coordinates
+import org.hikit.common.data.mapper.MultiPointCoordsMapper
 import org.hikit.er.data.Locality
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component
 class LocalityEntityMapper @Autowired constructor(
     private val imageEntityMapper: ImageEntityMapper,
     private val refCityMapper: RefCityMapper,
+    private val multiPointCoordsMapper: MultiPointCoordsMapper,
     private val recordDetailsMapper: RecordDetailsMapper
 ) : EntityMapper<Locality> {
     override fun mapToObject(document: Document): Locality {
@@ -20,10 +21,8 @@ class LocalityEntityMapper @Autowired constructor(
             remoteId = document.getString(Locality.REMOTE_ID),
             name = document.getString(Locality.NAME),
             description = document.getString(Locality.DESCRIPTION),
-            coordinates = Coordinates(
-                longitude = longLat[0] as Double,
-                latitude = longLat[1] as Double
-            ),
+            coordinates = multiPointCoordsMapper.mapToObject(
+                document.get(Locality.COORDINATES, Document::class.java)),
             images = document.getList(Locality.IMAGES, Document::class.java)
                 .map { imageEntityMapper.mapToObject(it) },
             relatingCity = refCityMapper.mapToObject(document.get(Locality.RELATING_CITY, Document::class.java)),
@@ -42,13 +41,7 @@ class LocalityEntityMapper @Autowired constructor(
             .append(Locality.REMOTE_ID, entity.remoteId)
             .append(Locality.NAME, entity.name)
             .append(Locality.DESCRIPTION, entity.description)
-            .append(
-                Locality.COORDINATES,
-                listOf(
-                    entity.coordinates.longitude.toFloat(),
-                    entity.coordinates.latitude.toFloat()
-                )
-            )
+            .append(Locality.COORDINATES, multiPointCoordsMapper.mapToDocument(entity.coordinates))
             .append(Locality.IMAGES, entity.images.map { imageEntityMapper.mapToDocument(it) })
             .append(Locality.RELATING_CITY, refCityMapper.mapToDocument(entity.relatingCity))
             .append(Locality.RECORD_DETAILS, recordDetailsMapper.mapToDocument(entity.recordDetails))

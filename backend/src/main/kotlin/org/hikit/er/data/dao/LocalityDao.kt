@@ -40,7 +40,8 @@ class LocalityDao @Autowired constructor(
                 Locality.COORDINATES,
                 getPointNearSearchQuery(
                     coordinates.longitude,
-                    coordinates.latitude, distance
+                    coordinates.latitude,
+                    distance
                 )
             )
         )
