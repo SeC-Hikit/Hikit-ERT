@@ -21,7 +21,7 @@ class LocalityEntityMapper @Autowired constructor(
             name = document.getString(Locality.NAME),
             description = document.getString(Locality.DESCRIPTION),
             coordinates = multiPointCoordsMapper.mapToObject(
-                document.get(Locality.COORDINATES, Document::class.java)
+                document.get(Locality.POINTS, Document::class.java)
             ),
             images = document.getList(Locality.IMAGES, Document::class.java)
                 .map { imageEntityMapper.mapToObject(it) },
@@ -41,7 +41,7 @@ class LocalityEntityMapper @Autowired constructor(
             .append(Locality.REMOTE_ID, entity.remoteId)
             .append(Locality.NAME, entity.name)
             .append(Locality.DESCRIPTION, entity.description)
-            .append(Locality.COORDINATES, multiPointCoordsMapper.mapToDocument(entity.coordinates))
+            .append(Locality.POINTS, multiPointCoordsMapper.mapToDocument(entity.coordinates))
             .append(Locality.IMAGES, entity.images.map { imageEntityMapper.mapToDocument(it) })
             .append(Locality.RELATING_CITY, refCityMapper.mapToDocument(entity.relatingCity))
             .append(Locality.RECORD_DETAILS, recordDetailsMapper.mapToDocument(entity.recordDetails))

@@ -14,7 +14,7 @@ class StartupChecker @Autowired constructor(private val dataSource: Datasource) 
     fun initIndexes() {
         val db = dataSource.db
         val pointGeoIndex = db.getCollection(Locality.COLLECTION_NAME)
-            .createIndex(Indexes.geo2dsphere(Locality.COORDINATES))
+            .createIndex(Indexes.geo2dsphere(Locality.POINTS))
 
     }
 }

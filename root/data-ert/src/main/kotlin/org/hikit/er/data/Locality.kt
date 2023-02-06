@@ -21,7 +21,7 @@ data class Locality(
         val REMOTE_ID: String = "remoteId"
         val NAME: String = "name"
         val DESCRIPTION: String = "description"
-        val COORDINATES: String = "coordinates"
+        val POINTS: String = "points"
         val IMAGES: String = "images"
         val RELATING_CITY: String = "cityRefs"
         val RECORD_DETAILS: String = "recordDetails"

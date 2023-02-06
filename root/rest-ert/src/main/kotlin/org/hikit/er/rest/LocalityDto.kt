@@ -7,8 +7,7 @@ data class LocalityDto(
     var name: String,
     var description: String,
     var coordinates: List<CoordinatesDto>,
-    var image: ImageDto,
-    var license: String,
+    var image: List<ImageDto>,
     var relatingCity: CityRefDto,
     var recordDetails: RecordDetailsDto,
     var importedOn: Date
