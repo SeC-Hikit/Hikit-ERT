@@ -19,7 +19,7 @@ class LocalityController @Autowired constructor(
     private val localityResponseHelper: LocalityResponseHelper
 ) {
     companion object {
-        const val PREFIX = "/localities"
+        const val PREFIX = "/locality"
     }
 
     @Operation(summary = "Retrieve localities by distance from a point")

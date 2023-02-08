@@ -3,6 +3,10 @@ package org.hikit.er.data.mapper
 import org.hikit.er.data.Locality
 import org.hikit.er.rest.*
 import org.springframework.stereotype.Component
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.ZoneOffset
+import java.util.*
 
 @Component
 class LocalityMapperDto {
@@ -42,8 +46,8 @@ class LocalityMapperDto {
                 }
             ),
             recordDetails = RecordDetailsDto(
-                createdAt = lc.recordDetails.createdAt,
-                updatedAt = lc.recordDetails.updatedAt
+                createdAt = Date.from(lc.recordDetails.createdAt.toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant()),
+                updatedAt = Date.from(lc.recordDetails.updatedAt.toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant()) //lc.recordDetails.updatedAt.toLocalDate()
             ),
             importedOn = lc.importedOn
         )
