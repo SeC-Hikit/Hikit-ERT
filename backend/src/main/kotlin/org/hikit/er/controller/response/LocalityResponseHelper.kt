@@ -13,21 +13,22 @@ class LocalityResponseHelper @Autowired constructor(private val controllerPagina
     fun constructResponse(
         errors: Set<String>,
         dtos: List<LocalityDto>,
-        totalCount: Long,
+        totalCount: Int,
         skip: Int,
         limit: Int
     ): LocalityResponse {
+        val totalCountLong = totalCount.toLong()
         return if (errors.isNotEmpty()) {
             LocalityResponse(
                 Status.ERROR, errors, dtos, 1L,
-                1, limit.toLong(), totalCount
+                1, limit.toLong(), totalCountLong
             )
         } else LocalityResponse(
             Status.OK, errors, dtos,
             controllerPagination.getCurrentPage(skip, limit),
-            controllerPagination.getTotalPages(totalCount, limit),
+            controllerPagination.getTotalPages(totalCountLong, limit),
             limit.toLong(),
-            totalCount
+            totalCountLong
         )
     }
 }

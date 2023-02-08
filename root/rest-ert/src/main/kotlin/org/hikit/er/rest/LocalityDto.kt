@@ -1,5 +1,6 @@
 package org.hikit.er.rest
 
+import java.time.LocalDateTime
 import java.util.*
 
 data class LocalityDto(
@@ -7,8 +8,7 @@ data class LocalityDto(
     var name: String,
     var description: String,
     var coordinates: List<CoordinatesDto>,
-    var image: ImageDto,
-    var license: String,
+    var image: List<ImageDto>,
     var relatingCity: CityRefDto,
     var recordDetails: RecordDetailsDto,
     var importedOn: Date

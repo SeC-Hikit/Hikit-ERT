@@ -27,7 +27,7 @@ class IatMapper constructor(private val contactMapper: ContactMapper) : EntityMa
             .append(Iat.ADDRESS, entity.address)
             .append(Iat.NUMBER, entity.address)
             .append(
-                Locality.COORDINATES,
+                Locality.POINTS,
                 listOf(
                     entity.coordinates.longitude.toFloat(),
                     entity.coordinates.latitude.toFloat()

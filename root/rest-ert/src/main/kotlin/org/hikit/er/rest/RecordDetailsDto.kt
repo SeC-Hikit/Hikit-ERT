@@ -1,8 +1,8 @@
 package org.hikit.er.rest
 
-import java.time.LocalDateTime
+import java.util.*
 
 data class RecordDetailsDto (
-    var createdAt: LocalDateTime,
-    var updatedAt: LocalDateTime,
+    var createdAt: Date,
+    var updatedAt: Date,
 )

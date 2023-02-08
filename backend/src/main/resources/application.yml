@@ -3,6 +3,10 @@ server:
     contextPath: /api/v1
   port: 8991
 
+springdoc:
+  api-docs:
+    path: /api-docs
+
 db:
   name: ert
   uri: mongodb://localhost:27017
