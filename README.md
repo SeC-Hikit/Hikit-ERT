@@ -8,6 +8,7 @@ That will serve to integrate ERT data with Hikit service.
 - Maven 3
 
 ### Development build
+First, clone and build commons: https://github.com/SeC-Hikit/Hikit-Common.
 After cloning the repo, simply run `mvn install -f root/pom.xml`.
 
 ### Deployment Build
