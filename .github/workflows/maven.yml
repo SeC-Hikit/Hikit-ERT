@@ -27,6 +27,14 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+    - name: checkout Common
+      uses: actions/checkout@v2
+      with:
+        repository: SeC-Hikit/Hikit-Common
+        path: hikit-common
+    - name: install Common
+      working-directory: hikit-common
+      run: mvn install --file common/pom.xml
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
