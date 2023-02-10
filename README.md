@@ -8,7 +8,8 @@ That will serve to integrate ERT data with Hikit service.
 - Maven 3
 
 ### Development build
-After cloning the repo, simply run `mvn install -f root/pom.xml`.
+First, clone and build commons: https://github.com/SeC-Hikit/Hikit-Common.
+Then, after cloning this repo, simply run `mvn install -f root/pom.xml`.
 
 ### Deployment Build
 To include all dependencies in a portable uber-jar, run `mvn install -P package`.
