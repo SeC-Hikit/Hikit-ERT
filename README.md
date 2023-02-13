@@ -1,6 +1,5 @@
 # Hikit - ERT microservice
-Hikit ERT is a microservice responsible to retrieving data from ER Tourism API (https://apt-servizi.github.io/openapi-ert/).
-That will serve to integrate ERT data with Hikit service.
+Hikit ERT is a microservice responsible to retrieving data from ER Tourism API (https://apt-servizi.github.io/openapi-ert/), that will serve to integrate ERT data with Hikit service.
 
 ## Build
 ### Prerequisites
