@@ -27,7 +27,6 @@ Hikit ERT requires the following service up and running in order to fully operat
 To get these up and running in the least time possible, use the included `docker-compose.yml`:
 ```
 cd docker
-sh rset_download.sh
 docker-compose up
 ```
 Mind that the above set-up is for *test/dev only* as all services are exposed in the network and they do not
