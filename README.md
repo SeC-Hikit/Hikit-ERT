@@ -1,6 +1,5 @@
 # Hikit - ERT microservice
-Hikit ERT is a microservice responsible to retrieving data from ER Tourism API (https://apt-servizi.github.io/openapi-ert/).
-That will serve to integrate ERT data with Hikit service.
+Hikit ERT is a microservice responsible for retrieving data from ER Tourism API (https://apt-servizi.github.io/openapi-ert/), that will serve to integrate ERT data with Hikit service.
 
 ## Build
 ### Prerequisites
@@ -12,7 +11,7 @@ First, clone and build commons: https://github.com/SeC-Hikit/Hikit-Common.
 Then, after cloning this repo, simply run `mvn install -f root/pom.xml`.
 
 ### Deployment Build
-To include all dependencies in a portable uber-jar, run `mvn install -P package`.
+To include all dependencies in a portable uber-jar, run `mvn install -f root/pom.xml -P package`.
 
 ### Test
 There are two main types of tests written to address the Hikit QA: unit test and integration test.
@@ -22,27 +21,10 @@ Once the dependencies are made available, to run the integration tests, simply e
 ## Run
 
 ### Dependencies
-Hikit ERT requires the following service up and running in order to fully operate:
-- [MongoDB 4.x](https://www.mongodb.com)
-
-To get these up and running in the least time possible, use the included `docker-compose.yml`:
-```
-cd docker
-sh rset_download.sh
-docker-compose up
-```
-Mind that the above set-up is for *test/dev only* as all services are exposed in the network and they do not
-use authentication.
-
-### Hikit on Docker
-In case you want to test run Hikit in combination with all its dependencies:
-- Run a deployment build (see [Deployment build](#Deployment-build))
-- Run `sh docker/build.sh`
-- Run `docker-compose -f ./docker/docker-compose.yml -f ./docker/docker-compose.cluster.yml up`
-  The service will be available at `http://localhost:8990/api/v<N>` (where `<N>` stands for the version number)
+Hikit ERT requires a [MongoDB 4.x](https://www.mongodb.com) instance in order to store ERT data
 
 ### Production
-Since it does not support authentication, Hikit ERT should run in a DMZ, not reachable from the outer word.
+Since it does not support authentication, Hikit ERT must run in a DMZ.
 
 ### Properties
 Configure the `application.properties` file to fit the application runtime to your needs.

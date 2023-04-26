@@ -1,7 +1,6 @@
 package org.hikit.er.data.dao
 
 import com.mongodb.client.MongoCollection
-import com.mongodb.client.model.CountOptions
 import com.mongodb.client.model.FindOneAndReplaceOptions
 import com.mongodb.client.model.ReturnDocument
 import org.bson.Document
@@ -27,7 +26,8 @@ class LocalityDao @Autowired constructor(
         collection.findOneAndReplace(
             Document(Locality.REMOTE_ID, it.remoteId),
             localityEntity,
-            FindOneAndReplaceOptions().upsert(true).returnDocument(ReturnDocument.AFTER)
+            FindOneAndReplaceOptions()
+                .upsert(true).returnDocument(ReturnDocument.AFTER)
         )
     }.map {
         localityEntityMapper.mapToObject(it!!)
