@@ -8,6 +8,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestClientException
+import java.net.SocketTimeoutException
 
 @Component
 class LocalityClient @Autowired constructor(
@@ -25,14 +26,20 @@ class LocalityClient @Autowired constructor(
         updated: String?,
         query: String?
     ): ResponseEntity<org.openapitools.model.LocalityResponse>? {
-        return try {
-            restTemplateBuilder.build()
+         try {
+            logger.info("Fetching PROV=${prov} LIMIT=${limit} PAGE=${page}")
+            return restTemplateBuilder.build()
                 .getForEntity(
                     endpointUrl.plus("?prov=${prov}&limit=${limit}&page=${page}"),
-                    org.openapitools.model.LocalityResponse::class.java)
+                    org.openapitools.model.LocalityResponse::class.java
+                )
+        } catch (socketConnectionTimeout: SocketTimeoutException) {
+            logger.warn("The remote API timed-out, will retry on the next run")
+
         } catch (restClientException : RestClientException) {
             logger.error("The remote locality API responded with an error", restClientException.cause)
-            null
+
         }
+        return null
     }
 }

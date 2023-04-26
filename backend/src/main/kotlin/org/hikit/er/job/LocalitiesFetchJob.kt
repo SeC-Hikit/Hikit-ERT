@@ -1,8 +1,6 @@
 package org.hikit.er.job
 
 import org.apache.logging.log4j.LogManager
-import org.hikit.er.data.dao.LocalityDao
-import org.hikit.er.data.mapper.LocalityEntityMapper
 import org.hikit.er.data.processor.LocalityProcessor
 import org.hikit.er.manager.LocalityManager
 import org.springframework.beans.factory.annotation.Autowired
@@ -17,7 +15,6 @@ class LocalitiesFetchJob @Autowired constructor(
 ) {
     private val logger = LogManager.getLogger(LocalitiesFetchJob::class.java)
 
-    //    @Scheduled(fixedRateString = "PT12H", initialDelay = 1000)
     @Scheduled(initialDelay = 3000, fixedRate = 600000, timeUnit = TimeUnit.MILLISECONDS)
     fun fetch() {
         logger.info("Going to fetch LOCALITY data from ERT API")

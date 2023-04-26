@@ -202,6 +202,7 @@
                                     <mainClass>
                                         org.hikit.er.Main
                                     </mainClass>
+                                    <finalName>hikit-ert</finalName>
                                 </configuration>
                             </execution>
                         </executions>
