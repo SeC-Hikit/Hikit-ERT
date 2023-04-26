@@ -45,7 +45,7 @@ In case you want to test run Hikit in combination with all its dependencies:
 Since it does not support authentication, Hikit ERT should run in a DMZ, not reachable from the outer word.
 
 ### Properties
-Configure the `application.properties` file to fit the application runtime to your needs.
+Configure the `application.yml` file to fit the application runtime to your needs.
 For more on the system properties, check out the repo wiki pages.
 
 ## The API
