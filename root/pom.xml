@@ -13,7 +13,7 @@
 
     <groupId>org.hikit</groupId>
     <artifactId>root-ert</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>Hikit ERT</name>
     <description>Hikit ERT root pom</description>
     <packaging>pom</packaging>

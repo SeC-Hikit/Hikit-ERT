@@ -6,12 +6,12 @@
     <parent>
         <groupId>org.hikit</groupId>
         <artifactId>root-ert</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
         <relativePath>../root</relativePath>
     </parent>
 
     <artifactId>backend-ert</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <properties>
         <start-class>org.hikit.er.Main</start-class>
@@ -31,12 +31,12 @@
         <dependency>
             <groupId>org.hikit</groupId>
             <artifactId>rest-ert</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>org.hikit</groupId>
             <artifactId>data-ert</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>org.hikit</groupId>
