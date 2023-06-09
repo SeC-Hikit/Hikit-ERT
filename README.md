@@ -27,7 +27,7 @@ Hikit ERT requires a [MongoDB 4.x](https://www.mongodb.com) instance in order to
 Since it does not support authentication, Hikit ERT must run in a DMZ.
 
 ### Properties
-Configure the `application.properties` file to fit the application runtime to your needs.
+Configure the `application.yml` file to fit the application runtime to your needs.
 For more on the system properties, check out the repo wiki pages.
 
 ## The API
