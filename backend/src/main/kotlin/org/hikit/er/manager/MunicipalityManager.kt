@@ -19,5 +19,9 @@ constructor(
     fun getByLine(line: LineRequest) : List<Municipality> =
         municipalityDao.getByLine(line)
 
+    fun getByName(name: String): List<Municipality> =
+        municipalityDao.getByName(name)
+
+
 
 }

@@ -21,4 +21,10 @@ class MunicipalityService @Autowired constructor(private val municipalityManager
         val data = municipalityManager.getById(id).map { municipalityMapper.map(it) }
         return InternalResponse(data = data, totalCount = if (data.isEmpty()) 0 else 1)
     }
+
+    fun getByName(name: String): InternalResponse<MunicipalityDto> {
+        val data = municipalityManager.getByName(name).map { municipalityMapper.map(it) }
+        return InternalResponse(data = data, totalCount = if (data.isEmpty()) 0 else 1)
+    }
+
 }
