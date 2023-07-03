@@ -20,6 +20,9 @@ Once the dependencies are made available, to run the integration tests, simply e
 
 ## Run
 
+# Initialization
+Import municipality data by running the script contained in /init folder against the database instance.
+
 ### Dependencies
 Hikit ERT requires a [MongoDB 4.x](https://www.mongodb.com) instance in order to store ERT data
 

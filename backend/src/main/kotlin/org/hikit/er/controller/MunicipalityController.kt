@@ -21,8 +21,14 @@ class MunicipalityController @Autowired constructor(
     @Operation(summary = "Retrieve a municipality by ID")
     @GetMapping("/{id}")
     operator fun get(@PathVariable id: String): MunicipalityResponse {
-        throw NotImplementedError()
+        val internalResponse = municipalityService.getById(id)
+        return MunicipalityResponse(
+            Status.OK,
+            emptySet(),
+            internalResponse.data,
+        )
     }
+
 
     @PostMapping
     @Operation(summary = "Find within which municipalities a line is contained")
