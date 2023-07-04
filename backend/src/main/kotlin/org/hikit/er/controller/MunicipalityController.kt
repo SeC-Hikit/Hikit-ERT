@@ -20,7 +20,7 @@ class MunicipalityController @Autowired constructor(
 
     @Operation(summary = "Retrieve a municipality by ID")
     @GetMapping("/{id}")
-    operator fun get(@PathVariable id: String): MunicipalityResponse {
+    fun getById(@PathVariable id: String): MunicipalityResponse {
         val internalResponse = municipalityService.getById(id)
         return MunicipalityResponse(
             Status.OK,
