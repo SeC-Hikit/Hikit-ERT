@@ -12,16 +12,13 @@ constructor(
     private val municipalityDao: MunicipalityDao,
 ) {
 
-    fun getById(id: String) : List<Municipality> =
+    fun getById(id: String): List<Municipality> =
         municipalityDao.get(id)
 
-
-    fun getByLine(line: LineRequest) : List<Municipality> =
+    fun getByLine(line: LineRequest): List<Municipality> =
         municipalityDao.getByLine(line)
 
     fun getByName(name: String): List<Municipality> =
         municipalityDao.getByName(name)
-
-
 
 }
