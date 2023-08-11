@@ -1,8 +1,10 @@
 package org.hikit.er.service
 
 import org.hikit.er.controller.response.internal.LocalityInternalResponse
+import org.hikit.er.controller.response.internal.InternalResponse
 import org.hikit.er.data.Coordinates
 import org.hikit.er.manager.LocalityManager
+import org.hikit.er.rest.LocalityDto
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
