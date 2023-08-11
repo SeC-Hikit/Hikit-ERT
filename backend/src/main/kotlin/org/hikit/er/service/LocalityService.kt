@@ -9,6 +9,13 @@ import org.springframework.stereotype.Service
 @Service
 class LocalityService @Autowired constructor(private val localityManager: LocalityManager) {
 
+    fun getByIstat(istatCode: String): LocalityInternalResponse {
+        val response = localityManager.getByIstat(istatCode)
+        return LocalityInternalResponse(
+            response, response.size
+        )
+    }
+
     fun get(skip: Int, limit: Int, coordinates: Coordinates, distance: Double): LocalityInternalResponse =
         LocalityInternalResponse(
             localityManager.get(skip, limit, coordinates, distance),
