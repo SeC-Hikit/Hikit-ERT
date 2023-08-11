@@ -19,9 +19,13 @@ constructor(
         localityDao.get(skip, limit, coordinates, distance)
             .map { localityMapper.map(it) }
 
+    fun getByIstat(istatCode: String) : List<LocalityDto> =
+        localityDao.getByIstat(istatCode)
+            .map { localityMapper.map(it) }
+
 
     fun upsertOnRemoteId(localities: List<Locality>): List<Locality> =
-        localityDao.upsertOnRemoteId(localities);
+        localityDao.upsertOnRemoteId(localities)
 
     fun countByDistance(coordinates: Coordinates, distance: Double): Int =
         localityDao.count(coordinates, distance)

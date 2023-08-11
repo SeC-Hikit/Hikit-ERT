@@ -40,6 +40,13 @@ class LocalityDao @Autowired constructor(
         return documentListMapperHelper.toEntries(documents, localityEntityMapper)
     }
 
+    fun getByIstat(istatCode: String): List<Locality> {
+        val documents = collection.find(
+            Document("cityRefs.istat", istatCode)
+        )
+        return documentListMapperHelper.toEntries(documents, localityEntityMapper)
+    }
+
     private fun getLocalityByCoordinatesAndDistanceQuery(coordinates: Coordinates, metersDistance: Double) = Document(
         Locality.POINTS, Document(
             "\$near", Document(
