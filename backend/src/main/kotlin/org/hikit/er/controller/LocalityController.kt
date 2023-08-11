@@ -26,7 +26,7 @@ class LocalityController @Autowired constructor(
 
     @Operation(summary = "Retrieve localities by ISTAT code")
     @GetMapping("/{istatCode}")
-    operator fun get(
+    fun getByIstat(
         @PathVariable istatCode: String
     ): LocalityResponse {
         val internalResponse = localityService.getByIstat(istatCode)
