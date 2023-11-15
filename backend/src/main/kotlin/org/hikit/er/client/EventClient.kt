@@ -4,7 +4,6 @@ import io.swagger.annotations.ApiParam
 import org.apache.logging.log4j.LogManager
 import org.ert.api.EventsApi
 import org.openapitools.model.EventResponse
-import org.openapitools.model.LocalityResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.web.client.RestTemplateBuilder
@@ -37,7 +36,6 @@ class EventClient @Autowired constructor(
 
         } catch (restClientException : RestClientException) {
             logger.error("The remote locality API responded with an error", restClientException.cause)
-
         }
         return null
     }

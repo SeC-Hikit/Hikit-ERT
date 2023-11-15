@@ -2,6 +2,7 @@ package org.hikit.er.client
 
 import org.apache.logging.log4j.LogManager
 import org.ert.api.LocalitiesApi
+import org.openapitools.model.LocalityResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.web.client.RestTemplateBuilder
@@ -25,7 +26,7 @@ class LocalityClient @Autowired constructor(
         page: Int?,
         updated: String?,
         query: String?
-    ): ResponseEntity<org.openapitools.model.LocalityResponse>? {
+    ): ResponseEntity<LocalityResponse>? {
          try {
             logger.info("Fetching PROV=${prov} LIMIT=${limit} PAGE=${page}")
             return restTemplateBuilder.build()
@@ -38,7 +39,6 @@ class LocalityClient @Autowired constructor(
 
         } catch (restClientException : RestClientException) {
             logger.error("The remote locality API responded with an error", restClientException.cause)
-
         }
         return null
     }
