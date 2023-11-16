@@ -18,9 +18,9 @@ class EventEntityMapper @Autowired constructor(
     override fun mapToObject(document: Document): Event {
         return Event(
                 _id = document.getObjectId(Event.ID).toHexString(),
-                remoteId = document.getObjectId(Event.REMOTE_ID).toHexString(),
-                title = document.getObjectId(Event.TITLE).toHexString(),
-                description = document.getObjectId(Event.DESCRIPTION).toHexString()
+                remoteId = document.getString(Event.REMOTE_ID),
+                title = document.getString(Event.TITLE),
+                description = document.getString(Event.DESCRIPTION)
         )
     }
 

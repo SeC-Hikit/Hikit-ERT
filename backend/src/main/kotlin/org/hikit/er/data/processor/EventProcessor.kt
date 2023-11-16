@@ -1,5 +1,5 @@
 package org.hikit.er.data.processor
-/*
+
 import org.hikit.er.client.EventClient
 import org.hikit.er.data.mapper.batch.EventMapper
 import org.openapitools.model.EventResponseData
@@ -13,7 +13,7 @@ class EventProcessor @Autowired constructor(
 {
     fun processBatch(batchPage: Int) : EventBatch {
         val eventsGet = eventClient
-                .eventsGet("it", "", "BO", 10, batchPage, "", "")
+                .eventsGet("it", "", "BO", "", "", "", batchPage, 10, "")
                 ?: return EventBatch(0, 0, emptyList())
         val page = eventsGet.let { it.body?.meta?.currentPage }?.toInt()
         val of = eventsGet.let { it.body?.meta?.lastPage }?.toInt()
@@ -22,4 +22,3 @@ class EventProcessor @Autowired constructor(
         return EventBatch(page!!, of!!, mappedEntities)
     }
 }
-*/

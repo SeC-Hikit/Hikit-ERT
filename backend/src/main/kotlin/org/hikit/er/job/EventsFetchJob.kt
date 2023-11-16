@@ -1,5 +1,5 @@
 package org.hikit.er.job
-/*
+
 import org.apache.logging.log4j.LogManager
 import org.hikit.er.data.processor.EventProcessor
 import org.hikit.er.manager.EventManager
@@ -28,4 +28,3 @@ class EventsFetchJob @Autowired constructor(
         } while (isThereMoreToFetch)
     }
 }
-*/
