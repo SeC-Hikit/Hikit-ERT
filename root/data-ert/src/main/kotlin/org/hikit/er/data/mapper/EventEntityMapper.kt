@@ -20,7 +20,10 @@ class EventEntityMapper @Autowired constructor(
                 _id = document.getObjectId(Event.ID).toHexString(),
                 remoteId = document.getString(Event.REMOTE_ID),
                 title = document.getString(Event.TITLE),
-                description = document.getString(Event.DESCRIPTION)
+                description = document.getString(Event.DESCRIPTION),
+                coordinates = multiPointCoordinatesMapper.mapToObject(
+                        document.get(Event.POINTS, Document::class.java)
+                )
         )
     }
 

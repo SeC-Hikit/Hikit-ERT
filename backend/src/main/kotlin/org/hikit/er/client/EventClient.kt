@@ -42,7 +42,7 @@ class EventClient @Autowired constructor(
         } catch (socketConnectionTimeout: SocketTimeoutException) {
             logger.warn("The remote API timed-out, will retry on the next run")
         } catch (restClientException : RestClientException) {
-            logger.error("The remote locality API responded with an error", restClientException.cause)
+            logger.warn("The remote locality API responded with an error", restClientException.cause)
         }
         return null
     }

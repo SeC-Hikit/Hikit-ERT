@@ -6,5 +6,6 @@ import java.util.*
 data class EventDto(
     var id: String,
     var title: String,
-    var description: String
+    var description: String,
+    var coordinates: List<CoordinatesDto>
 )

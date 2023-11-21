@@ -13,7 +13,7 @@ class EventProcessor @Autowired constructor(
 {
     fun processBatch(batchPage: Int) : EventBatch {
         val eventsGet = eventClient
-                .eventsGet("it", "", "BO", "", "", "", batchPage, 10, "")
+                .eventsGet("it", "", "", "BO", "", "", batchPage, 10, "")
                 ?: return EventBatch(0, 0, emptyList())
         val page = eventsGet.let { it.body?.meta?.currentPage }?.toInt()
         val of = eventsGet.let { it.body?.meta?.lastPage }?.toInt()

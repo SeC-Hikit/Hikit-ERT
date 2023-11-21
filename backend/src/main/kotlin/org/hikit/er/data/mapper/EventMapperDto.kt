@@ -1,6 +1,7 @@
 package org.hikit.er.data.mapper
 
 import org.hikit.er.data.Event
+import org.hikit.er.rest.CoordinatesDto
 import org.hikit.er.rest.EventDto
 import org.springframework.stereotype.Component
 
@@ -14,6 +15,7 @@ class EventMapperDto {
             EventDto(
                     ev.remoteId,
                     ev.title,
-                    ev.description
+                    ev.description,
+                    ev.coordinates.coordinates2D.map { CoordinatesDto(it[1], it[0]) }
             )
 }
