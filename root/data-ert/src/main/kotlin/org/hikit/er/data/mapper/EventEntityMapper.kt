@@ -9,10 +9,9 @@ import org.springframework.stereotype.Component
 
 @Component
 class EventEntityMapper @Autowired constructor(
-        private val imageEntityMapper: ImageEntityMapper,
-        private val refCityMapper: RefCityMapper,
-        private val multiPointCoordinatesMapper: MultiPointCoordsMapper,
-        private val recordDetailsMapper: RecordDetailsMapper
+    private val refCityMapper: RefCityMapper,
+    private val multiPointCoordinatesMapper: MultiPointCoordsMapper,
+    private val recordDetailsMapper: RecordDetailsMapper
 ) : EntityMapper<Event> {
 
     override fun mapToObject(document: Document): Event {
@@ -32,5 +31,5 @@ class EventEntityMapper @Autowired constructor(
                 .append(Event.REMOTE_ID, entity.remoteId)
                 .append(Event.TITLE, entity.title)
                 .append(Event.DESCRIPTION, entity.description)
-                .append(Event.POINTS, entity.coordinates)
+                .append(Event.POINTS, multiPointCoordinatesMapper.mapToDocument(entity.coordinates))
 }
