@@ -1,6 +1,7 @@
 package org.hikit.er.data.mapper.batch
 
 import org.hikit.common.data.mapper.MultiPointCoords2D
+import org.hikit.er.data.Category
 import org.hikit.er.data.Event
 import org.hikit.er.data.Ticket
 import org.hikit.er.data.mapper.DateTimeMapper
@@ -36,7 +37,14 @@ class EventMapper @Autowired constructor(private val dateTimeMapper: DateTimeMap
                     gratuity = erp.ticketing.gratuity,
                     type = erp.ticketing.type,
                     entrance = erp.ticketing.entrance
-                )
+                ),
+                    category = erp.category.map { att ->
+                        Category(
+                                _id = att.id,
+                                name = att.name,
+                                parent = att.parent
+                        )
+                    }
             )
         } catch (e: Exception) {
             logger.warn("Could not map Event. Error: ${e.message}")

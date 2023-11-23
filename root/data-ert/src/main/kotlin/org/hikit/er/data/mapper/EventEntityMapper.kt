@@ -9,12 +9,10 @@ import org.springframework.stereotype.Component
 
 @Component
 class EventEntityMapper @Autowired constructor(
-    private val refCityMapper: RefCityMapper,
     private val multiPointCoordinatesMapper: MultiPointCoordsMapper,
-    private val recordDetailsMapper: RecordDetailsMapper,
-    private val ticketDetailsMapper: TicketDetailsMapper
+    private val ticketDetailsMapper: TicketDetailsMapper,
+        private val categoryDetailsMapper: CategoryDetailsMapper
 ) : EntityMapper<Event> {
-
     override fun mapToObject(document: Document): Event {
         return Event(
             _id = document.getObjectId(Event.ID).toHexString(),
@@ -31,7 +29,10 @@ class EventEntityMapper @Autowired constructor(
                             Event.TICKETING,
                             Document::class.java
                     )
-            )
+            ),
+            category = document.getList(Event.CATEGORY, Document::class.java).map {
+                categoryDetailsMapper.mapToObject(it)
+            }
         )
     }
 
@@ -44,4 +45,5 @@ class EventEntityMapper @Autowired constructor(
                 .append(Event.DATE_FROM, entity.date_from)
                 .append(Event.DATE_TO, entity.date_to)
                 .append(Event.TICKETING, ticketDetailsMapper.mapToDocument(entity.ticketing))
+                .append(Event.CATEGORY, entity.category.map { categoryDetailsMapper.mapToDocument(it) })
 }
