@@ -7,7 +7,10 @@ data class Event(
         var remoteId: String,
         var title: String,
         var description: String,
-        var coordinates: MultiPointCoords2D
+        var coordinates: MultiPointCoords2D,
+        var date_from: String,
+        var date_to: String,
+        var ticketing: Ticket
 ) {
     companion object {
         val COLLECTION_NAME: String = "ert.Event"
@@ -17,5 +20,8 @@ data class Event(
         val TITLE: String = "title"
         val DESCRIPTION: String = "description"
         val POINTS: String = "points"
+        val DATE_FROM: String = "date_from"
+        val DATE_TO: String = "date_to"
+        val TICKETING: String = "ticketing"
     }
 }

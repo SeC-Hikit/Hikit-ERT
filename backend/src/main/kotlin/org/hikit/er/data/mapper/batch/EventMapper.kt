@@ -2,6 +2,7 @@ package org.hikit.er.data.mapper.batch
 
 import org.hikit.common.data.mapper.MultiPointCoords2D
 import org.hikit.er.data.Event
+import org.hikit.er.data.Ticket
 import org.hikit.er.data.mapper.DateTimeMapper
 import org.openapitools.model.EventResponseData
 import org.slf4j.Logger
@@ -25,6 +26,16 @@ class EventMapper @Autowired constructor(private val dateTimeMapper: DateTimeMap
                         listOf(loc.lng.toDouble(),
                                 loc.lat.toDouble())
                     }
+                ),
+                date_from = erp.dates.from,
+                date_to = erp.dates.to,
+                ticketing = Ticket(
+                    website = erp.ticketing.website,
+                    subscriptions = erp.ticketing.subscriptions,
+                    full_rate = erp.ticketing.fullRate,
+                    gratuity = erp.ticketing.gratuity,
+                    type = erp.ticketing.type,
+                    entrance = erp.ticketing.entrance
                 )
             )
         } catch (e: Exception) {

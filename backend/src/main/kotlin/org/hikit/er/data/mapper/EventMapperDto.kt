@@ -16,6 +16,8 @@ class EventMapperDto {
                     ev.remoteId,
                     ev.title,
                     ev.description,
-                    ev.coordinates.coordinates2D.map { CoordinatesDto(it[1], it[0]) }
+                    ev.coordinates.coordinates2D.map { CoordinatesDto(it[1], it[0]) },
+                    ev.date_from,
+                    ev.date_to
             )
 }
