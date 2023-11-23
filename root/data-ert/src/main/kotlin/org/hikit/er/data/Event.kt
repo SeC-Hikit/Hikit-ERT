@@ -11,7 +11,8 @@ data class Event(
         var date_from: String,
         var date_to: String,
         var ticketing: Ticket,
-        var category: List<Category>
+        var category: List<Category>,
+        var attachments: List<Image>
 ) {
     companion object {
         val COLLECTION_NAME: String = "ert.Event"
@@ -25,5 +26,6 @@ data class Event(
         val DATE_TO: String = "date_to"
         val TICKETING: String = "ticketing"
         val CATEGORY: String = "category"
+        val ATTACHMENTS: String = "attachments"
     }
 }

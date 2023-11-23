@@ -9,5 +9,8 @@ data class EventDto(
     var description: String,
     var coordinates: List<CoordinatesDto>,
     var date_from: String,
-    var date_to: String
+    var date_to: String,
+    var ticketing: TicketDto,
+    var category: List<CategoryDto>,
+    var attachments: List<ImageDto>
 )

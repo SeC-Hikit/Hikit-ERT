@@ -5,6 +5,6 @@ data class TicketDto(
     var subscriptions: String,
     var full_rate: String,
     var gratuity: String,
-    var type: String,
+    var type: Int,
     var entrance: String
 )

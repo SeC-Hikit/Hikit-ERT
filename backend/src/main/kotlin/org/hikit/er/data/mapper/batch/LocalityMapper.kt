@@ -54,7 +54,6 @@ class LocalityMapper @Autowired constructor(private val dateTimeMapper: DateTime
                 images = lrp.attachments.map { att ->
                     Image(
                         url = att.url,
-                        thumb = att.thumbUrl,
                         title = att.title ?: "",
                         name = att.name,
                         width = att.width,

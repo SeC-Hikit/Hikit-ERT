@@ -1,8 +1,8 @@
 package org.hikit.er.data.mapper
 
 import org.hikit.er.data.Event
-import org.hikit.er.rest.CoordinatesDto
-import org.hikit.er.rest.EventDto
+import org.hikit.er.data.Ticket
+import org.hikit.er.rest.*
 import org.springframework.stereotype.Component
 
 @Component
@@ -18,6 +18,32 @@ class EventMapperDto {
                     ev.description,
                     ev.coordinates.coordinates2D.map { CoordinatesDto(it[1], it[0]) },
                     ev.date_from,
-                    ev.date_to
+                    ev.date_to,
+                    TicketDto(
+                        ev.ticketing.website,
+                        ev.ticketing.subscriptions,
+                        ev.ticketing.full_rate,
+                        ev.ticketing.gratuity,
+                        ev.ticketing.type,
+                        ev.ticketing.entrance
+                    ),
+                    ev.category.map {
+                        CategoryDto(
+                            it._id,
+                            it.name,
+                            it.parent
+                        )
+                    },
+                    ev.attachments.map {
+                        ImageDto(
+                            it.url,
+                            it.title,
+                            it.name,
+                            it.width,
+                            it.height,
+                            it.license,
+                            it.licenseUrl
+                        )
+                    }
             )
 }

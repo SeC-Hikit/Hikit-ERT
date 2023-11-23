@@ -22,11 +22,10 @@ class LocalityMapperDto {
             lc.coordinates.coordinates2D.map { CoordinatesDto(it[1], it[0]) },
             lc.images.map {
                 ImageDto(
-                    it.url, it.thumb, it.title, it.name, it.width,
+                    it.url, it.title, it.name, it.width,
                     it.height, it.license, it.licenseUrl
                 )
             },
-
             CityRefDto(
                 istat = lc.relatingCity.istat,
                 city = lc.relatingCity.city,

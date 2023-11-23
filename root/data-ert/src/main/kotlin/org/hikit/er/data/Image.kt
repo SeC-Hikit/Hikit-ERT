@@ -2,7 +2,6 @@ package org.hikit.er.data
 
 data class Image(
     val url: String,
-    val thumb: String,
     val title: String,
     val name: String,
     val width: Int,
@@ -12,7 +11,6 @@ data class Image(
 ) {
     companion object {
         val URL: String = "url"
-        val THUMB: String = "thumb"
         val TITLE: String = "title"
         val NAME: String = "name"
         val WIDTH: String = "width"

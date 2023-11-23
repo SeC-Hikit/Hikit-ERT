@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component
 @Component
 class CategoryDetailsMapper : EntityMapper<Category> {
     override fun mapToObject(doc: Document?): Category =
-            Category(
-                _id = if (doc != null) doc.getInteger(Category.ID) else 0,
-                name = if (doc != null) doc.getString(Category.NAME) else "",
-                parent = if (doc != null) doc.getInteger(Category.PARENT) else 0
-            )
+        Category(
+            _id = if (doc != null) doc.getInteger(Category.ID) else 0,
+            name = if (doc != null) doc.getString(Category.NAME) else "",
+            parent = if (doc != null) doc.getInteger(Category.PARENT) else 0
+        )
 
     override fun mapToDocument(obj: Category): Document =
         Document()
