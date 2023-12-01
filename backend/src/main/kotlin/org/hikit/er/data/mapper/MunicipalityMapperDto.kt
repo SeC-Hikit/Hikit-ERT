@@ -27,7 +27,6 @@ class MunicipalityMapperDto {
                     it.height, it.license, it.licenseUrl
                 )
             },
-
             CityRefDto(
                 istat = lc.relatingCity.istat,
                 city = lc.relatingCity.city,

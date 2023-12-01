@@ -6,6 +6,7 @@ import com.mongodb.client.model.ReturnDocument
 import org.bson.Document
 import org.hikit.common.datasource.Datasource
 import org.hikit.common.datasource.DocumentListMapperHelper
+import org.hikit.er.data.Coordinates
 import org.hikit.er.data.Event
 import org.hikit.er.data.mapper.EventEntityMapper
 import org.springframework.beans.factory.annotation.Autowired
@@ -29,4 +30,11 @@ class EventDao @Autowired constructor(
         )}.map {
             eventEntityMapper.mapToObject(it!!)
     }
+/*
+    fun getByMunicipality(skip: Int, limit: Int, coordinates: Coordinates, metersDistance: Double): List<Event> {
+        val documents = collection.find(
+            getEvent
+        )
+    }
+*/
 }

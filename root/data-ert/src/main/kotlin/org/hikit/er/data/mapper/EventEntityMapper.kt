@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class EventEntityMapper @Autowired constructor(
+    private val eventLocationMapper: EventLocationMapper,
     private val multiPointCoordinatesMapper: MultiPointCoordsMapper,
     private val ticketDetailsMapper: TicketDetailsMapper,
     private val categoryDetailsMapper: CategoryDetailsMapper,
@@ -20,9 +21,8 @@ class EventEntityMapper @Autowired constructor(
             remoteId = document.getString(Event.REMOTE_ID),
             title = document.getString(Event.TITLE),
             description = document.getString(Event.DESCRIPTION),
-            coordinates = multiPointCoordinatesMapper.mapToObject(
-                document.get(Event.POINTS, Document::class.java)
-            ),
+            locations = document.getList(Event.LOCATIONS, Document::class.java)
+                    .map { eventLocationMapper.mapToObject(it) },
             date_from = document.getString(Event.DATE_FROM),
             date_to = document.getString(Event.DATE_TO),
             ticketing = ticketDetailsMapper.mapToObject(
@@ -40,15 +40,21 @@ class EventEntityMapper @Autowired constructor(
         )
     }
 
+    // POINTS still not added
     override fun mapToDocument(entity: Event): Document =
         Document()
             .append(Event.REMOTE_ID, entity.remoteId)
             .append(Event.TITLE, entity.title)
             .append(Event.DESCRIPTION, entity.description)
-            .append(Event.POINTS, multiPointCoordinatesMapper.mapToDocument(entity.coordinates))
             .append(Event.DATE_FROM, entity.date_from)
             .append(Event.DATE_TO, entity.date_to)
+
+            // TODO
+/*            .append(Event.POINTS, entity.locations.map {
+                listOf(
+                    multiPointCoordinatesMapper.mapToDocument(entity.)
+            })*/
             .append(Event.TICKETING, ticketDetailsMapper.mapToDocument(entity.ticketing))
             .append(Event.CATEGORY, entity.category.map { categoryDetailsMapper.mapToDocument(it) })
-                .append(Event.ATTACHMENTS, entity.attachments.map { imageEntityMapper.mapToDocument(it) })
+            .append(Event.ATTACHMENTS, entity.attachments.map { imageEntityMapper.mapToDocument(it) })
 }

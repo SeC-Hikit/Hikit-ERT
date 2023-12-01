@@ -7,7 +7,7 @@ data class Event(
         var remoteId: String,
         var title: String,
         var description: String,
-        var coordinates: MultiPointCoords2D,
+        var locations: List<EventLocation>,
         var date_from: String,
         var date_to: String,
         var ticketing: Ticket,
@@ -21,6 +21,7 @@ data class Event(
         val REMOTE_ID: String = "remoteId"
         val TITLE: String = "title"
         val DESCRIPTION: String = "description"
+        val LOCATIONS: String = "locations"
         val POINTS: String = "points"
         val DATE_FROM: String = "date_from"
         val DATE_TO: String = "date_to"

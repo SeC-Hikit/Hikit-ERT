@@ -1,10 +1,7 @@
 package org.hikit.er.data.mapper.batch
 
 import org.hikit.common.data.mapper.MultiPointCoords2D
-import org.hikit.er.data.Category
-import org.hikit.er.data.Event
-import org.hikit.er.data.Image
-import org.hikit.er.data.Ticket
+import org.hikit.er.data.*
 import org.hikit.er.data.mapper.DateTimeMapper
 import org.openapitools.model.EventResponseData
 import org.slf4j.Logger
@@ -23,12 +20,18 @@ class EventMapper @Autowired constructor(private val dateTimeMapper: DateTimeMap
                 remoteId = erp.id.toString(),
                 title = erp.title,
                 description = erp.description,
-                coordinates = MultiPointCoords2D(
-                    erp.locations.map { loc ->
-                        listOf(loc.lng.toDouble(),
-                                loc.lat.toDouble())
-                    }
-                ),
+                locations = erp.locations.map { loc ->
+                    EventLocation(
+                        title = loc.title,
+                        city = loc.city,
+                        province = loc.province,
+                        address = loc.address,
+                        coordinates = Coordinates(
+                            latitude = loc.lat.toDouble(),
+                            longitude = loc.lng.toDouble()
+                        )
+                    )
+                },
                 date_from = erp.dates.from,
                 date_to = erp.dates.to,
                 ticketing = Ticket(
