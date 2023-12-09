@@ -1,7 +1,5 @@
 package org.hikit.er.data
 
-import org.hikit.common.data.mapper.MultiPointCoords2D
-
 data class Event(
         var _id: String,
         var remoteId: String,

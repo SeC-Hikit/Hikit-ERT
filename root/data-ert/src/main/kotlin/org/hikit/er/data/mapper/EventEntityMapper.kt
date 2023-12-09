@@ -2,6 +2,7 @@ package org.hikit.er.data.mapper
 
 import org.bson.Document
 import org.hikit.common.data.mapper.EntityMapper
+import org.hikit.common.data.mapper.MultiPointCoords2D
 import org.hikit.common.data.mapper.MultiPointCoordsMapper
 import org.hikit.er.data.Event
 import org.springframework.beans.factory.annotation.Autowired
@@ -22,7 +23,7 @@ class EventEntityMapper @Autowired constructor(
             title = document.getString(Event.TITLE),
             description = document.getString(Event.DESCRIPTION),
             locations = document.getList(Event.LOCATIONS, Document::class.java)
-                    .map { eventLocationMapper.mapToObject(it) },
+                .map { eventLocationMapper.mapToObject(it) },
             date_from = document.getString(Event.DATE_FROM),
             date_to = document.getString(Event.DATE_TO),
             ticketing = ticketDetailsMapper.mapToObject(
@@ -40,21 +41,23 @@ class EventEntityMapper @Autowired constructor(
         )
     }
 
-    // POINTS still not added
-    override fun mapToDocument(entity: Event): Document =
-        Document()
+    override fun mapToDocument(entity: Event): Document {
+        val coords: List<List<Double>> = entity.locations.map {
+            listOf(it.coordinates.longitude, it.coordinates.latitude)
+        }
+        val locationsAsPoints = MultiPointCoords2D(coords)
+        return Document()
             .append(Event.REMOTE_ID, entity.remoteId)
             .append(Event.TITLE, entity.title)
             .append(Event.DESCRIPTION, entity.description)
             .append(Event.DATE_FROM, entity.date_from)
             .append(Event.DATE_TO, entity.date_to)
-
-            // TODO
-/*            .append(Event.POINTS, entity.locations.map {
-                listOf(
-                    multiPointCoordinatesMapper.mapToDocument(entity.)
-            })*/
+            .append(
+                Event.POINTS,
+                multiPointCoordinatesMapper.mapToDocument(locationsAsPoints)
+            )
             .append(Event.TICKETING, ticketDetailsMapper.mapToDocument(entity.ticketing))
             .append(Event.CATEGORY, entity.category.map { categoryDetailsMapper.mapToDocument(it) })
             .append(Event.ATTACHMENTS, entity.attachments.map { imageEntityMapper.mapToDocument(it) })
+    }
 }

@@ -6,7 +6,6 @@ import com.mongodb.client.model.ReturnDocument
 import org.bson.Document
 import org.hikit.common.datasource.Datasource
 import org.hikit.common.datasource.DocumentListMapperHelper
-import org.hikit.er.data.Coordinates
 import org.hikit.er.data.Event
 import org.hikit.er.data.mapper.EventEntityMapper
 import org.springframework.beans.factory.annotation.Autowired
@@ -26,7 +25,8 @@ class EventDao @Autowired constructor(
                 Document(Event.REMOTE_ID, it.remoteId),
                 eventDocument,
                 FindOneAndReplaceOptions()
-                        .upsert(true).returnDocument(ReturnDocument.AFTER)
+                        .upsert(true)
+                        .returnDocument(ReturnDocument.AFTER)
         )}.map {
             eventEntityMapper.mapToObject(it!!)
     }
