@@ -1,8 +1,6 @@
 package org.hikit.er.data.mapper.batch
 
-import org.hikit.common.data.mapper.MultiPointCoords2D
 import org.hikit.er.data.*
-import org.hikit.er.data.mapper.DateTimeMapper
 import org.openapitools.model.EventResponseData
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -10,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class EventMapper @Autowired constructor(private val dateTimeMapper: DateTimeMapper) {
+class EventMapper @Autowired constructor() {
     private val logger: Logger = LoggerFactory.getLogger(EventMapper::class.java)
 
-    fun map(erp: EventResponseData): Event? {
+    fun map(erp: EventResponseData, cityRef: CityRef): Event? {
         return try {
             Event(
                 _id = "",
@@ -59,7 +57,8 @@ class EventMapper @Autowired constructor(private val dateTimeMapper: DateTimeMap
                         license = att.license,
                         licenseUrl = att.licenseUrl
                     )
-                }
+                },
+                municipality = cityRef
             )
         } catch (e: Exception) {
             logger.warn("Could not map Event. Error: ${e.message}")

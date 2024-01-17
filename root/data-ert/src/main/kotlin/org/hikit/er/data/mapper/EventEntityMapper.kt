@@ -14,6 +14,7 @@ class EventEntityMapper @Autowired constructor(
     private val multiPointCoordinatesMapper: MultiPointCoordsMapper,
     private val ticketDetailsMapper: TicketDetailsMapper,
     private val categoryDetailsMapper: CategoryDetailsMapper,
+    private val refCityMapper: RefCityMapper,
     private val imageEntityMapper: ImageEntityMapper
 ) : EntityMapper<Event> {
     override fun mapToObject(document: Document): Event {
@@ -37,7 +38,10 @@ class EventEntityMapper @Autowired constructor(
             },
             attachments = document.getList(Event.ATTACHMENTS, Document::class.java).map {
                 imageEntityMapper.mapToObject(it)
-            }
+            },
+            municipality = refCityMapper.mapToObject(
+                document.get(Event.MUNICIPALITY, Document::class.java)
+            )
         )
     }
 
@@ -52,6 +56,7 @@ class EventEntityMapper @Autowired constructor(
             .append(Event.DESCRIPTION, entity.description)
             .append(Event.DATE_FROM, entity.date_from)
             .append(Event.DATE_TO, entity.date_to)
+            .append(Event.LOCATIONS, entity.locations.map { eventLocationMapper.mapToDocument(it) })
             .append(
                 Event.POINTS,
                 multiPointCoordinatesMapper.mapToDocument(locationsAsPoints)
@@ -59,5 +64,6 @@ class EventEntityMapper @Autowired constructor(
             .append(Event.TICKETING, ticketDetailsMapper.mapToDocument(entity.ticketing))
             .append(Event.CATEGORY, entity.category.map { categoryDetailsMapper.mapToDocument(it) })
             .append(Event.ATTACHMENTS, entity.attachments.map { imageEntityMapper.mapToDocument(it) })
+            .append(Event.MUNICIPALITY, refCityMapper.mapToDocument(entity.municipality))
     }
 }

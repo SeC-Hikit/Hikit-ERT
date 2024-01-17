@@ -12,6 +12,6 @@ data class EventLocation(
         val CITY: String = "city"
         val PROVINCE: String = "province"
         val ADDRESS: String = "address"
-        val COORDINATES: String = "coordinates"
+        val POINTS: String = "points"
     }
 }

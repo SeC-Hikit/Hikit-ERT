@@ -1,6 +1,5 @@
 package org.hikit.er.manager
 
-import org.hikit.er.data.Coordinates
 import org.hikit.er.data.Event
 import org.hikit.er.data.dao.EventDao
 import org.hikit.er.data.mapper.EventMapperDto
@@ -15,8 +14,12 @@ class EventManager @Autowired constructor(
 ) {
     fun upsertOnRemoteId(events: List<Event>): List<Event> =
             eventDao.upsertOnRemoteId(events)
-/*
-    fun getByMunicipality(skip: Int, limit: Int, coordinates: Coordinates, distance: Double): List<EventDto> =
-            eventDao.getByMunicipality(skip, limit, coordinates, distance)
+
+    fun getByIstat(istat: String, skip: Int, limit: Int): List<EventDto> =
+            eventDao.getByIstatCode(istat, skip, limit)
                     .map { eventMapper.map(it) }
-*/}
+
+    fun countByIstat(istat: String): Int =
+        eventDao.countByIstat(istat)
+
+}

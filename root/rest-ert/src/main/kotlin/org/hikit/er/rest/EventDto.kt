@@ -10,5 +10,6 @@ data class EventDto(
     var date_to: String,
     var ticketing: TicketDto,
     var category: List<CategoryDto>,
+    var cityRef: CityRefDto,
     var attachments: List<ImageDto>
 )

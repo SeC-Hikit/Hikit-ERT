@@ -2,7 +2,6 @@ package org.hikit.er.data.mapper
 
 import org.bson.Document
 import org.hikit.common.data.mapper.EntityMapper
-import org.hikit.common.data.mapper.MultiPointCoordsMapper
 import org.hikit.er.data.Coordinates
 import org.hikit.er.data.EventLocation
 import org.hikit.er.data.Locality
@@ -10,12 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class EventLocationMapper @Autowired constructor(
-        private val multiPointCoordsMapper: MultiPointCoordsMapper
-) : EntityMapper<EventLocation> {
+class EventLocationMapper @Autowired constructor() : EntityMapper<EventLocation> {
 
     override fun mapToObject(doc: Document): EventLocation {
-        val longLat = doc.get(EventLocation.COORDINATES, List::class.java)
+        val longLat = doc.get(EventLocation.POINTS, List::class.java)
         return EventLocation(
             title = doc.getString(EventLocation.TITLE),
             city = doc.getString(EventLocation.CITY),

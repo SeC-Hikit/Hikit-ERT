@@ -1,16 +1,11 @@
 package org.hikit.er.data.mapper
 
 import org.hikit.er.data.Event
-import org.hikit.er.data.Ticket
 import org.hikit.er.rest.*
 import org.springframework.stereotype.Component
 
 @Component
-class EventMapperDto {
-    fun map(eventDto: EventDto): Event {
-        throw NotImplementedError()
-    }
-
+class EventMapperDto constructor(private val cityRefMapperDto: CityRefMapperDto){
     fun map(ev: Event): EventDto =
         EventDto(
             ev.remoteId,
@@ -45,6 +40,7 @@ class EventMapperDto {
                     it.parent
                 )
             },
+            cityRefMapperDto.map(ev.municipality),
             ev.attachments.map {
                 ImageDto(
                     it.url,

@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 @Component
 class EventsFetchJob @Autowired constructor(
         private val eventProcessor: EventProcessor,
-        private val eventManager: EventManager
+        private val eventManager: EventManager,
 ) {
     private val logger = LogManager.getLogger(EventsFetchJob::class.java)
 
@@ -23,7 +23,7 @@ class EventsFetchJob @Autowired constructor(
             val processBatch = eventProcessor.processBatch(pageToProcess)
             eventManager.upsertOnRemoteId(processBatch.data)
             val isThereMoreToFetch = processBatch.page < processBatch.of
-            pageToProcess += 1;
+            pageToProcess += 1
             Thread.sleep(1000)
         } while (isThereMoreToFetch)
     }

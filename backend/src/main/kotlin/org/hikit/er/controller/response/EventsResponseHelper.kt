@@ -1,28 +1,28 @@
 package org.hikit.er.controller.response
 
 import org.hikit.common.response.ControllerPagination
-import org.hikit.er.rest.LocalityDto
-import org.hikit.er.rest.response.LocalityResponse
+import org.hikit.er.rest.EventDto
+import org.hikit.er.rest.response.EventsResponse
 import org.hikit.er.rest.response.Status
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class LocalityResponseHelper @Autowired constructor(private val controllerPagination: ControllerPagination){
+class EventsResponseHelper @Autowired constructor(private val controllerPagination: ControllerPagination) {
     fun constructResponse(
         errors: Set<String>,
-        dtos: List<LocalityDto>,
+        dtos: List<EventDto>,
         totalCount: Int,
         skip: Int,
         limit: Int
-    ): LocalityResponse {
+    ): EventsResponse {
         val totalCountLong = totalCount.toLong()
         return if (errors.isNotEmpty()) {
-            LocalityResponse(
+            EventsResponse(
                 Status.ERROR, errors, dtos, 1L,
                 1, limit.toLong(), totalCountLong
             )
-        } else LocalityResponse(
+        } else EventsResponse(
             Status.OK, errors, dtos,
             controllerPagination.getCurrentPage(skip, limit),
             controllerPagination.getTotalPages(totalCountLong, limit),
