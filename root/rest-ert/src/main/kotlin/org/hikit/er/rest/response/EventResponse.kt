@@ -2,7 +2,7 @@ package org.hikit.er.rest.response
 
 import org.hikit.er.rest.EventDto
 
-data class EventsResponse(
+data class EventResponse(
     val status: Status,
     val messages: Set<String>,
     val content: List<EventDto>,

@@ -3,7 +3,7 @@ package org.hikit.er.controller
 import io.swagger.v3.oas.annotations.Operation
 import org.hikit.common.ControllerConstants.*
 import org.hikit.er.controller.response.EventsResponseHelper
-import org.hikit.er.rest.response.EventsResponse
+import org.hikit.er.rest.response.EventResponse
 import org.hikit.er.service.EventService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -25,7 +25,7 @@ class EventController @Autowired constructor(
         @RequestParam(required = false, defaultValue = MIN_DOCS_ON_READ) skip: Int,
         @RequestParam(required = false, defaultValue = MAX_DOCS_ON_READ) limit: Int
     ):
-            EventsResponse {
+            EventResponse {
         val internalResponse = eventService.getByIstat(istatCode, skip, limit)
         return eventResponseHelper.constructResponse(
             emptySet(),
