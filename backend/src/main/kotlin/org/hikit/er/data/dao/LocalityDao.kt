@@ -66,6 +66,4 @@ class LocalityDao @Autowired constructor(
                 distance
             ),
         ).count()
-
-
 }

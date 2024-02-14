@@ -1,18 +1,16 @@
 package org.hikit.er.data.mapper
 
 import org.hikit.er.data.Locality
-import org.hikit.er.rest.*
+import org.hikit.er.rest.CoordinatesDto
+import org.hikit.er.rest.ImageDto
+import org.hikit.er.rest.LocalityDto
+import org.hikit.er.rest.RecordDetailsDto
 import org.springframework.stereotype.Component
-import java.time.LocalDateTime
 import java.time.ZoneId
-import java.time.ZoneOffset
 import java.util.*
 
 @Component
-class LocalityMapperDto {
-    fun map(localityDto: LocalityDto): Locality {
-        throw NotImplementedError()
-    }
+class LocalityMapperDto constructor(private val cityRefMapperDto: CityRefMapperDto){
 
     fun map(lc: Locality): LocalityDto =
         LocalityDto(
@@ -22,29 +20,11 @@ class LocalityMapperDto {
             lc.coordinates.coordinates2D.map { CoordinatesDto(it[1], it[0]) },
             lc.images.map {
                 ImageDto(
-                    it.url, it.thumb, it.title, it.name, it.width,
+                    it.url, it.title, it.name, it.width,
                     it.height, it.license, it.licenseUrl
                 )
             },
-
-            CityRefDto(
-                istat = lc.relatingCity.istat,
-                city = lc.relatingCity.city,
-                province = lc.relatingCity.province,
-                province_short = lc.relatingCity.province_short,
-                iat = lc.relatingCity.iat.map {
-                    IatDto(
-                        name = it.name,
-                        address = it.address,
-                        number = it.number,
-                        CoordinatesDto(
-                            it.coordinates.longitude,
-                            it.coordinates.latitude
-                        ),
-                        it.contacts.map { c -> ContactDto(c.label, c.type, c.value) }
-                    )
-                }
-            ),
+            cityRefMapperDto.map(lc.relatingCity),
             recordDetails = RecordDetailsDto(
                 createdAt = Date.from(lc.recordDetails.createdAt.toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant()),
                 updatedAt = Date.from(lc.recordDetails.updatedAt.toLocalDate().atStartOfDay(ZoneId.systemDefault()).toInstant()) //lc.recordDetails.updatedAt.toLocalDate()

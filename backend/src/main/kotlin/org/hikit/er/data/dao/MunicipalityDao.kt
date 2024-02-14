@@ -5,6 +5,7 @@ import org.bson.Document
 import org.hikit.common.datasource.Datasource
 import org.hikit.common.datasource.DocumentListMapperHelper
 import org.hikit.er.controller.request.LineRequest
+import org.hikit.er.data.Coordinates
 import org.hikit.er.data.Municipality
 import org.hikit.er.data.mapper.MunicipalityEntityMapper
 import org.springframework.beans.factory.annotation.Autowired
@@ -53,6 +54,25 @@ class MunicipalityDao @Autowired constructor(
     fun getByName(name: String) : List<Municipality> {
         val documents = collection.find(
             Document("name", name)
+        )
+        return documentListMapperHelper.toEntries(documents, municipalityEntityMapper)
+    }
+
+    fun getByPoint(point: Coordinates): List<Municipality> {
+        val query = Document(
+            Municipality.GEOMETRY,
+            Document(
+                "\$geoIntersects",
+                Document(
+                    "\$geometry",
+                    Document(
+                        "type", "Point"
+                    ).append("coordinates", listOf(point.longitude, point.latitude))
+                )
+            )
+        )
+        val documents = collection.find(
+            query
         )
         return documentListMapperHelper.toEntries(documents, municipalityEntityMapper)
     }

@@ -10,7 +10,6 @@ class ImageEntityMapper : EntityMapper<Image> {
     override fun mapToObject(doc: Document): Image =
         Image(
             url = doc.getString(Image.URL),
-            thumb = doc.getString(Image.THUMB),
             title = doc.getString(Image.TITLE),
             name = doc.getString(Image.NAME),
             width = doc.getInteger(Image.WIDTH),
@@ -21,7 +20,6 @@ class ImageEntityMapper : EntityMapper<Image> {
 
     override fun mapToDocument(obj: Image): Document =
         Document(Image.URL, obj.url)
-            .append(Image.THUMB, obj.thumb)
             .append(Image.TITLE, obj.title)
             .append(Image.NAME, obj.name)
             .append(Image.WIDTH, obj.width)
