@@ -13,3 +13,4 @@ db:
 
 endpoint:
   locality: https://emiliaromagnaturismo.it/opendata/v1/localities
+  event: https://emiliaromagnaturismo.it/opendata/v1/events
