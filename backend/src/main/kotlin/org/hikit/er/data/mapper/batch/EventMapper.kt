@@ -1,6 +1,7 @@
 package org.hikit.er.data.mapper.batch
 
 import org.hikit.er.data.*
+import org.hikit.er.data.imported.EventImport
 import org.openapitools.model.EventResponseData
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -11,9 +12,9 @@ import org.springframework.stereotype.Component
 class EventMapper @Autowired constructor() {
     private val logger: Logger = LoggerFactory.getLogger(EventMapper::class.java)
 
-    fun map(erp: EventResponseData, cityRef: CityRef): Event? {
+    fun map(erp: EventResponseData, cityRef: CityRef): EventImport? {
         return try {
-            Event(
+            EventImport(
                 _id = "",
                 remoteId = erp.id.toString(),
                 title = erp.title,

@@ -8,20 +8,24 @@ import org.hikit.common.datasource.Datasource
 import org.hikit.common.datasource.DocumentListMapperHelper
 import org.hikit.er.data.CityRef
 import org.hikit.er.data.Event
-import org.hikit.er.data.mapper.EventEntityMapper
+import org.hikit.er.data.imported.EventImport
+import org.hikit.er.data.mapper.ImportedEventEntityMapper
+import org.hikit.er.data.mapper.imported.EventEntityMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import java.util.*
 
 @Component
 class EventDao @Autowired constructor(
+    private val importedEventEntityMapper: ImportedEventEntityMapper,
     private val eventEntityMapper: EventEntityMapper,
     private val documentListMapperHelper: DocumentListMapperHelper<Event>,
     dataSource: Datasource
 ) {
     private val collection: MongoCollection<Document> = dataSource.db.getCollection(Event.COLLECTION_NAME)
 
-    fun upsertOnRemoteId(events: List<Event>): List<Event> = events.map {
-        val eventDocument = eventEntityMapper.mapToDocument(it)
+    fun upsertOnRemoteId(events: List<EventImport>): List<Event> = events.map {
+        val eventDocument = importedEventEntityMapper.mapToDocument(it)
         collection.findOneAndReplace(
             Document(Event.REMOTE_ID, it.remoteId),
             eventDocument,
@@ -41,7 +45,18 @@ class EventDao @Autowired constructor(
 
     fun countByIstat(istat: String): Int =
         collection.countDocuments(
-            Document(Event.MUNICIPALITY + "." + CityRef.ISTAT, istat))
-            .toInt()
+            Document(Event.MUNICIPALITY + "." + CityRef.ISTAT, istat)
+        ).toInt()
+
+    fun deleteOutdatedEntries(date: Date) {
+        collection.deleteMany(
+            Document(
+                Event.DATE_TO,
+                Document(
+                    "\$lt", date
+                )
+            )
+        )
+    }
 
 }

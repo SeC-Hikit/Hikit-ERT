@@ -1,9 +1,9 @@
 package org.hikit.er.data.processor
 
-import org.hikit.er.data.Event
+import org.hikit.er.data.imported.EventImport
 
 data class EventBatch(
         val page: Int,
         val of: Int,
-        val data: List<Event>
+        val data: List<EventImport>
 )

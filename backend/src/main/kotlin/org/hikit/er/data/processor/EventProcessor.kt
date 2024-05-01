@@ -2,7 +2,7 @@ package org.hikit.er.data.processor
 
 import org.hikit.er.client.EventClient
 import org.hikit.er.data.Coordinates
-import org.hikit.er.data.Event
+import org.hikit.er.data.imported.EventImport
 import org.hikit.er.data.mapper.batch.EventMapper
 import org.hikit.er.manager.MunicipalityManager
 import org.openapitools.model.EventResponseData
@@ -26,7 +26,7 @@ class EventProcessor @Autowired constructor(
         return EventBatch(page!!, of!!, mappedEntities)
     }
 
-    private fun mapEvent(loc: EventResponseData): Event? {
+    private fun mapEvent(loc: EventResponseData): EventImport? {
         val locationData = loc.locations.first()
         val municipalityByPoint = municipalityController.getByPoint(
             Coordinates(locationData.lat.toDouble(), locationData.lng.toDouble())

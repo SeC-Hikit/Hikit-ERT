@@ -15,7 +15,7 @@ class EventsFetchJob @Autowired constructor(
 ) {
     private val logger = LogManager.getLogger(EventsFetchJob::class.java)
 
-    @Scheduled(initialDelay = 3000, fixedRate = 600000, timeUnit = TimeUnit.MILLISECONDS)
+    @Scheduled(fixedRate = 1, timeUnit = TimeUnit.DAYS)
     fun fetch() {
         logger.info("Going to fetch EVENT data from ERT API")
         var pageToProcess = 0
@@ -27,4 +27,11 @@ class EventsFetchJob @Autowired constructor(
             Thread.sleep(1000)
         } while (isThereMoreToFetch)
     }
+
+    @Scheduled(fixedRate = 1, timeUnit = TimeUnit.DAYS)
+    fun cleanOldEntries() {
+        logger.info("Going to clean outdated EVENTs data from ERT API")
+        eventManager.deleteOutdatedEntries()
+    }
+
 }
