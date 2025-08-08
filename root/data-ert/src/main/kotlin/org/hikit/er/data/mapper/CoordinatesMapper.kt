@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component
 @Component
 class CoordinatesMapper {
     fun map(doc: List<Double>) = Coordinates(
-        latitude = doc[0],
-        longitude = doc[1]
+        latitude = doc[1],
+        longitude = doc[0]
     )
 }
