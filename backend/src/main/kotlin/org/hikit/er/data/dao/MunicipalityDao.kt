@@ -53,7 +53,7 @@ class MunicipalityDao @Autowired constructor(
 
     fun getByName(name: String) : List<Municipality> {
         val documents = collection.find(
-            Document("name", name)
+            Document("name", name.replace("’", "'"))
         )
         return documentListMapperHelper.toEntries(documents, municipalityEntityMapper)
     }
